@@ -1,6 +1,12 @@
-[build]
-  command = "npm run build"
-  destination = "dist"
+name = "mgmu-did-system"
+compatibility_date = "2024-05-01"
 
-[build.environment]
-  NODE_VERSION = "18"
+[assets]
+directory = "./dist"
+
+# If you need to set the Node version for the build environment, 
+# it's usually done in the Cloudflare Dashboard settings, 
+# but you can keep the build command here if using Wrangler's build flow:
+[build]
+command = "npm run build"
+
