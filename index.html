@@ -26,7 +26,68 @@
       body { margin: 0; }
       #root { min-height: 100vh; }
     </style>
-  </head>
+  </head><div id="player" style="display:none;"></div>
+
+<div id="controls">
+  <button id="playPause">▶</button>
+  <button id="next">⏭</button>
+</div>
+
+<script src="https://youtube.com/playlist?list=PLHLdB1EngoPWYzLj19OItQQ0dTWbRC2Hj&si=QQoh6JGi1zC8-1Fb"></script>
+
+<script>
+let player;
+let isPlaying = false;
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    height: '0',
+    width: '0',
+    playerVars: {
+      listType: 'playlist',
+      list: 'YOUR_PLAYLIST_ID', // replace here
+      autoplay: 0,
+      controls: 0
+    }
+  });
+}
+
+document.getElementById("playPause").onclick = () => {
+  if (!isPlaying) {
+    player.playVideo();
+    isPlaying = true;
+    playPause.textContent = "⏸";
+  } else {
+    player.pauseVideo();
+    isPlaying = false;
+    playPause.textContent = "▶";
+  }
+};
+
+document.getElementById("next").onclick = () => {
+  player.nextVideo();
+};
+</script>
+
+<style>
+#controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: white;
+  font-size: 18px;
+  padding: 12px;
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+}
+</style>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
