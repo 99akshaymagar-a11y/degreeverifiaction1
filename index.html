@@ -25,15 +25,14 @@
       html { background: #f7f8fa; }
       body { margin: 0; }
       #root { min-height: 100vh; }
-    </style>
-  </head><div id="player" style="display:none;"></div>
+    </style><div id="player" style="display:none;"></div>
 
 <div id="controls">
   <button id="playPause">▶</button>
   <button id="next">⏭</button>
 </div>
 
-<script src="https://youtube.com/playlist?list=PLHLdB1EngoPWYzLj19OItQQ0dTWbRC2Hj&si=QQoh6JGi1zC8-1Fb"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
 let player;
@@ -45,22 +44,25 @@ function onYouTubeIframeAPIReady() {
     width: '0',
     playerVars: {
       listType: 'playlist',
-      list: 'YOUR_PLAYLIST_ID', // replace here
+      list: 'PLHLdB1EngoPWYzLj19OItQQ0dTWbRC2Hj',
       autoplay: 0,
-      controls: 0
+      controls: 0,
+      modestbranding: 1
     }
   });
 }
 
-document.getElementById("playPause").onclick = () => {
+const playPauseBtn = document.getElementById("playPause");
+
+playPauseBtn.onclick = () => {
   if (!isPlaying) {
     player.playVideo();
     isPlaying = true;
-    playPause.textContent = "⏸";
+    playPauseBtn.textContent = "⏸";
   } else {
     player.pauseVideo();
     isPlaying = false;
-    playPause.textContent = "▶";
+    playPauseBtn.textContent = "▶";
   }
 };
 
@@ -79,15 +81,21 @@ document.getElementById("next").onclick = () => {
 }
 
 button {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.08);
   border: none;
   color: white;
   font-size: 18px;
   padding: 12px;
   border-radius: 50%;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+
+button:hover {
+  background: rgba(255,255,255,0.2);
 }
 </style>
+  
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
